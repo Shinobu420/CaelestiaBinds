@@ -1,5 +1,7 @@
 mod cli;
+mod config;
 mod hyprland;
+mod ui;
 
 #[cfg(test)]
 mod tests;
