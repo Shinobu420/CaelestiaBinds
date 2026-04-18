@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=CaelestiaBinds
+Comment=A GUI to display Caelestia keybindings
+Exec=fish -c "caelestia-binds"
+Icon=Logo_B.png
+Type=Application
+Categories=Utility;keybinding;Viewer;
