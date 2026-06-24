@@ -14,7 +14,8 @@ if test $status -eq 0
     
     cp assets/Logo_B.png ~/.local/share/icons/Logo_B.png
 
-    cp caelestiabind.desktop ~/.local/share/applications/
+    # Use absolute path for Exec in the installed desktop entry to ensure GUI launchers can find it
+    string replace "Exec=caelestia-binds" "Exec=$HOME/.local/bin/caelestia-binds" < caelestiabind.desktop > ~/.local/share/applications/caelestiabind.desktop
     
     echo "Updating desktop database..."
     update-desktop-database ~/.local/share/applications/
