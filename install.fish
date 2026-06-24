@@ -26,8 +26,8 @@ if test $status -eq 0
     echo "Adding Keybinds..."
     
     # add window rules and keybinds to hyprland
-    set CONF_FILE "$HOME/.config/caelestia/hypr-user.conf"
-    set BIND_LINE "bind = Super, Return, exec, pkill -x caelestia-binds || ~/.local/bin/caelestia-binds"
+    set CONF_FILE "$HOME/.config/caelestia/hypr-user.lua"
+    set BIND_LINE 'hl.bind("SUPER + Return", hl.dsp.exec_cmd("pkill -x caelestia-binds || ~/.local/bin/caelestia-binds"))'
 
     mkdir -p (dirname $CONF_FILE)
     touch $CONF_FILE
@@ -39,18 +39,17 @@ if test $status -eq 0
         echo "Keybind already exists in config. Skipping."
     end
     if not grep -q "caelestiabind-float-center" $CONF_FILE
-    echo "Adding windowrule to config..."
-    
-    echo "
-        windowrule {
-            name = caelestiabind-float-center
-            match:title = ^(CaelestiaBinds)\$
-            float = on
-            center = on
-        }" >> $CONF_FILE
-else
-    echo "Windowrule already exists. Skipping."
-end
+        echo "Adding windowrule to config..."
+        echo '
+hl.window_rule({
+    name = "caelestiabind-float-center",
+    match = { title = "^(CaelestiaBinds)$" },
+    float = true,
+    center = true
+})' >> $CONF_FILE
+    else
+        echo "Windowrule already exists. Skipping."
+    end
     echo "Installation complete!"
 else
     echo "Cargo build failed."
